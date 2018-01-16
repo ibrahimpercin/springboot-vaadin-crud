@@ -21,7 +21,7 @@ public class User {
 	
 	private String email;
 	
-	private Exp exp;
+	private Exp experience;
 	
 	private LocalDate birthDate;
 
@@ -43,14 +43,14 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.exp = exp;
+		this.experience = exp;
 	}
 	
 	public User(String firstName, String lastName, String email, Exp exp, LocalDate birthDate) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.exp = exp;
+		this.experience = exp;
 		this.birthDate = birthDate;
 	}
 
@@ -86,18 +86,17 @@ public class User {
 		this.email = email;
 	}
 
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
 	}
 
-	public Exp getExp() {
-		return exp;
+	public Exp getExperience() {
+		return experience;
 	}
 
-	public void setExp(Exp exp) {
-		this.exp = exp;
+	public void setExperience(Exp experience) {
+		this.experience = experience;
 	}
 
 	public LocalDate getBirthDate() {

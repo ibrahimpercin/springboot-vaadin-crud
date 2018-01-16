@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.crudexample.democrud.model.Exp;
 import com.crudexample.democrud.model.User;
 import com.crudexample.democrud.repo.UserRepository;
-import com.vaadin.data.Binder;
+import com.vaadin.data.BeanValidationBinder;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.UserError;
@@ -31,7 +31,7 @@ public class UserEditor extends VerticalLayout {
 	TextField firstName = new TextField("First name");
 	TextField lastName = new TextField("Last name");
 	TextField email = new TextField("Email");
-	NativeSelect<Exp> exp = new NativeSelect<>("Experience");
+	NativeSelect<Exp> experience = new NativeSelect<>("Experience");
 	private DateField birthDate = new DateField("Birthday");
 
 	Button saveButton = new Button("Save", VaadinIcons.CHECK);
@@ -39,30 +39,33 @@ public class UserEditor extends VerticalLayout {
 	Button deleteButton = new Button("Delete", VaadinIcons.TRASH);
 	CssLayout actions = new CssLayout(saveButton, cancelButton, deleteButton);
 
-	Binder<User> binder = new Binder<>(User.class);
+	BeanValidationBinder<User> binder = new BeanValidationBinder<>(User.class);
 
 	@Autowired
 	public UserEditor(UserRepository repository) {
 		HorizontalLayout hLayoutName = new HorizontalLayout(firstName, lastName);
-		HorizontalLayout hLayout = new HorizontalLayout(birthDate, exp);
-		
+		HorizontalLayout hLayout = new HorizontalLayout(birthDate, experience);
+		VerticalLayout verticalLayout = new VerticalLayout(hLayoutName, hLayout, email, actions);
+		verticalLayout.setWidth(600, Unit.PIXELS);
+
 		birthDate.setIcon(VaadinIcons.DATE_INPUT);
-		
-		exp.setIcon(VaadinIcons.EDIT);
-		
+
+		experience.setIcon(VaadinIcons.EDIT);
+
 		this.repository = repository;
-		firstName.setPlaceholder("firstname");
+		firstName.setPlaceholder("First Name");
+		lastName.setPlaceholder("Last Name");
 		firstName.setIcon(VaadinIcons.USER);
 
 		email.setIcon(VaadinIcons.MAILBOX);
-		exp.setItems(Exp.values());
-		exp.setWidth(185, Unit.PIXELS);
+		experience.setItems(Exp.values());
+		experience.setWidth(185, Unit.PIXELS);
 
 		lastName.setIcon(VaadinIcons.USER_CHECK);
 		lastName.setDescription("Last name cannot be empty");
 		lastName.setComponentError(new UserError("Last name cannot be empty"));
 
-		addComponents(hLayoutName, hLayout, email, actions);
+		addComponents(verticalLayout);
 		binder.bindInstanceFields(this);
 
 		// some styles
@@ -93,7 +96,8 @@ public class UserEditor extends VerticalLayout {
 		} else {
 			user = users;
 		}
-		cancelButton.setVisible(persisted);
+		deleteButton.setVisible(persisted);
+		lastName.setEnabled(!persisted);
 
 		// Data binding
 		binder.setBean(user);
