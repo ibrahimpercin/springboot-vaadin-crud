@@ -16,6 +16,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.dnd.DragSourceExtension;
 import com.vaadin.ui.themes.ValoTheme;
 
 @SuppressWarnings("serial")
@@ -44,14 +45,13 @@ public class VaadinUI extends UI {
 
 	@Override
 	protected void init(VaadinRequest request) {
-		
 		HorizontalLayout actions = new HorizontalLayout(filter, addNewBtn);
 		VerticalLayout mainLayout = new VerticalLayout(actions, grid, editor);
 		setContent(mainLayout);
 		addNewBtn.setStyleName(ValoTheme.BUTTON_FRIENDLY);
 
 		grid.setHeight(400, Unit.PIXELS);
-		grid.setWidth(600, Unit.PIXELS);
+		grid.setWidth(800, Unit.PIXELS);
 		grid.setColumns("id", "firstName", "lastName", "email","experience","birthDate");
 
 		// Filtering

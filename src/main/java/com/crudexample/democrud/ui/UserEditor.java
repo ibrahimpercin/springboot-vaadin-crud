@@ -9,12 +9,14 @@ import com.vaadin.data.BeanValidationBinder;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.UserError;
+import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.NativeSelect;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -33,7 +35,9 @@ public class UserEditor extends VerticalLayout {
 	TextField email = new TextField("Email");
 	NativeSelect<Exp> experience = new NativeSelect<>("Experience");
 	private DateField birthDate = new DateField("Birthday");
-
+	
+	Label label = new Label("Update User", ContentMode.HTML);
+	
 	Button saveButton = new Button("Save", VaadinIcons.CHECK);
 	Button cancelButton = new Button("Cancel");
 	Button deleteButton = new Button("Delete", VaadinIcons.TRASH);
@@ -45,10 +49,12 @@ public class UserEditor extends VerticalLayout {
 	public UserEditor(UserRepository repository) {
 		HorizontalLayout hLayoutName = new HorizontalLayout(firstName, lastName);
 		HorizontalLayout hLayout = new HorizontalLayout(birthDate, experience);
-		VerticalLayout verticalLayout = new VerticalLayout(hLayoutName, hLayout, email, actions);
-		verticalLayout.setWidth(600, Unit.PIXELS);
-
+		VerticalLayout verticalLayout = new VerticalLayout(label,hLayoutName, hLayout, email, actions);
+		verticalLayout.setWidth(800, Unit.PIXELS);
+		
+		// some styles
 		birthDate.setIcon(VaadinIcons.DATE_INPUT);
+		birthDate.setDateFormat("dd/MM/yyyy");
 
 		experience.setIcon(VaadinIcons.EDIT);
 
@@ -68,7 +74,7 @@ public class UserEditor extends VerticalLayout {
 		addComponents(verticalLayout);
 		binder.bindInstanceFields(this);
 
-		// some styles
+
 		setSpacing(true);
 		actions.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
 		saveButton.setStyleName(ValoTheme.BUTTON_PRIMARY);
@@ -93,8 +99,10 @@ public class UserEditor extends VerticalLayout {
 		final boolean persisted = users.getId() != null;
 		if (persisted) {
 			user = repository.findOne(users.getId());
+			label.setValue("<b>Update User</b>");
 		} else {
 			user = users;
+			label.setValue("<b>Add New User</b>");
 		}
 		deleteButton.setVisible(persisted);
 		lastName.setEnabled(!persisted);

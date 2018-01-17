@@ -21,10 +21,22 @@ public class DemocrudApplication {
 	@Bean
 	public CommandLineRunner loadData(UserRepository repository) {
 		return (args) -> {
-			// save a couple of customers
-			repository.save(new User("ibrahim", "percin"));
-			repository.save(new User("ibrahim", "2","A@A.com"));
-			repository.save(new User("ibrahim", "3","B@B.c",Exp.One,LocalDate.of(1994, 10, 24)));
+			// save a couple of customers		
+			repository.save(new User("ibrahim", "percin","ipercin@me.com",Exp.One,LocalDate.of(1994, 10, 24)));
+			repository.save(new User("ibrahim", "lastname","A@A.com"));
+			repository.save(new User("ibrahim", "lastname2","C@C.d",Exp.Three,LocalDate.of(1994, 10, 24)));
+			repository.save(new User("ibrahim", "lastname3","D@D.E",Exp.Two,LocalDate.of(1994, 10, 24)));
+			repository.save(new User("ibrahim", "lastname4","E@E.c",Exp.Four,LocalDate.of(1994, 10, 24)));
+			repository.save(new User("ibrahim", "percin","ipercin@me.com",Exp.One,LocalDate.of(1994, 10, 24)));
+			repository.save(new User("ibrahim", "lastname","A@A.com"));
+			repository.save(new User("ibrahim", "lastname2","C@C.d",Exp.Three,LocalDate.of(1994, 10, 24)));
+			repository.save(new User("ibrahim", "lastname3","D@D.E",Exp.Two,LocalDate.of(1994, 10, 24)));
+			repository.save(new User("ibrahim", "lastname4","E@E.c",Exp.Four,LocalDate.of(1994, 10, 24)));
+			repository.save(new User("ibrahim", "percin","ipercin@me.com",Exp.One,LocalDate.of(1994, 10, 24)));
+			repository.save(new User("ibrahim", "lastname","A@A.com"));
+			repository.save(new User("ibrahim", "lastname2","C@C.d",Exp.Three,LocalDate.of(1994, 10, 24)));
+			repository.save(new User("ibrahim", "lastname3","D@D.E",Exp.Two,LocalDate.of(1994, 10, 24)));
+			repository.save(new User("ibrahim", "lastname4","E@E.c",Exp.Four,LocalDate.of(1994, 10, 24)));
 		};
 	}
 }

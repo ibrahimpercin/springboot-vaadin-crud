@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class User {
 	
@@ -23,6 +25,7 @@ public class User {
 	
 	private Exp experience;
 	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate birthDate;
 
 	public User() {
@@ -86,11 +89,6 @@ public class User {
 		this.email = email;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
-	}
-
 	public Exp getExperience() {
 		return experience;
 	}
@@ -107,7 +105,12 @@ public class User {
 		this.birthDate = birthDate;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", experience=" + experience + ", birthDate=" + birthDate + "]";
+	}
+	
+	
 
-	
-	
 }
