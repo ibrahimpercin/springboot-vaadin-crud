@@ -15,7 +15,7 @@ import com.crudexample.democrud.repo.UserRepository;
 public class DemocrudApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemocrudApplication.class, args);
+		SpringApplication.run(DemocrudApplication.class, args);		
 	}
 	
 	@Bean

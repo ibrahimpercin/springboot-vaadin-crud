@@ -15,7 +15,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.9.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -34,6 +34,7 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot-starter</artifactId>
 		</dependency>
+
 
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -56,6 +57,11 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+		<dependency>
+			<groupId>com.vaadin.addon</groupId>
+			<artifactId>vaadin-charts</artifactId>
+			<version>4.0.0-alpha1</version>
+		</dependency>
 		</dependencies>
 	</dependencyManagement>
 

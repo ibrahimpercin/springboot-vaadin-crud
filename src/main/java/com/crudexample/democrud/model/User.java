@@ -2,12 +2,11 @@ package com.crudexample.democrud.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class User {
@@ -16,16 +15,17 @@ public class User {
 	@GeneratedValue
 	private Long id;
 	
+	@NotNull
 	private String firstName;
 	
 	@NotNull
 	private String lastName;
 	
+	@Column(name = "mail")
 	private String email;
 	
 	private Exp experience;
 	
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate birthDate;
 
 	public User() {
